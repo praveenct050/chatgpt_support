@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facetone User Creation Guide</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        main {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        ol, ul {
+            margin: 10px 0 20px 20px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        code {
+            background: #eee;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            margin: 40px 0 20px 0;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Facetone User Creation Guide</h1>
+</header>
+
+<main>
+    <p>For HBL</p>
+    <p>Follow below steps to create a new agent user account:</p>
+
+    <ol>
+        <li>Create User Account</li>
+        <li>Create Resources</li>
+        <li>Create SIP User Account</li>
+        <li>Map User with SIP Account</li>
+        <li>Add Scopes to the User</li>
+    </ol>
+
+    <h2>1. Create User Account</h2>
+    <p>Log into the admin console and navigate to <strong>USER → Users</strong></p>
+    <p>Example:</p>
+    <ul>
+        <li>Email: <code>agent@hbl.com</code></li>
+        <li>Password: <code>Hbl@123</code></li>
+        <li>User Type: Agent</li>
+        <li>First Name: Test</li>
+        <li>Last Name: Agent</li>
+        <li>Phone No.: use “1” if number is not provided</li>
+        <li>Nick Name: use the email address</li>
+    </ul>
+    <p>Click <strong>Add User</strong> button. Notification will show success or error details.</p>
+
+    <h2>2. Create Resources for the User</h2>
+    <ol>
+        <li>Navigate to <strong>Request Router → Resources</strong></li>
+        <li>Click the <strong>+</strong> sign to create a new resource account</li>
+        <li>Type the user’s email in <strong>Resource Name</strong> and press check</li>
+        <li>Insert <strong>Human, Agent, Call Center, Other Data</strong> and click <strong>Add</strong></li>
+        <li>Edit the resource account and set permissions:
+            <ul>
+                <li>Drag & drop <strong>Call task</strong> to access permission area</li>
+                <li>Set <strong>Concurrency</strong> to 1</li>
+            </ul>
+        </li>
+        <li>Assign skills to the user:
+            <ul>
+                <li>Drag skill from <strong>Available Skills</strong> to <strong>Assigned Skills</strong></li>
+                <li>Set percentage for each skill and press Enter</li>
+                <li>Repeat for all necessary skills</li>
+            </ul>
+        </li>
+    </ol>
+
+    <h2>3. Create SIP User Account</h2>
+    <ol>
+        <li>Navigate to <strong>USERS → SIP Users</strong></li>
+        <li>Find the last extension number and click <strong>New</strong></li>
+        <li>Fill details:
+            <ul>
+                <li>SIP Username: no special characters or numbers</li>
+                <li>Password: same as user account</li>
+                <li>Extension: next available</li>
+                <li>Pin: 1234</li>
+                <li>Email: user’s email</li>
+                <li>Select domain & context, tick all fields</li>
+                <li>Deny Outbound: NONE</li>
+            </ul>
+        </li>
+        <li>Click <strong>Save</strong>. Notification will show success or error</li>
+    </ol>
+
+    <h2>4. Map SIP User Account to User Account</h2>
+    <ol>
+        <li>Navigate to <strong>USERS → User</strong></li>
+        <li>Find the user and click the user icon</li>
+        <li>Click <strong>Edit Profile</strong></li>
+        <li>Scroll down and select the SIP user account</li>
+        <li>Click <strong>Save Profile</strong></li>
+    </ol>
+
+    <h2>5. Add Scopes to the User</h2>
+    <ol>
+        <li>Navigate to <strong>USERS → User</strong> and click the settings icon</li>
+        <li>Drag & drop <strong>Agent Console</strong> from Access Denied to Access area</li>
+        <li>Reload browser (mandatory)</li>
+        <li>Double click Agent Console, tick the fields, and click <strong>Update</strong></li>
+        <li>Repeat for all scopes, one by one</li>
+    </ol>
+
+    <p>If there are any issues with the created user accounts, contact <a href="mailto:support@duosoftware.com">DuoSoftware Support Team</a>.</p>
+
+    <p><em>Documented by: Duo Software Support Team | Date: 19-01-2020</em></p>
+
+    <p><a href="../index.html">&larr; Back to Knowledge Base</a></p>
+</main>
+
+<footer>
+    &copy; 2026 Office Knowledge Base
+</footer>
+
+</body>
+</html>
