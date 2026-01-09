@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Facetone User Creation Guide - Office Knowledge Base</title>
+    <title>Office Knowledge Base</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f0f8ff;
             margin: 0;
             padding: 0;
-            line-height: 1.6;
         }
         header {
             background-color: #4CAF50;
@@ -22,28 +21,27 @@
             max-width: 900px;
             margin: 20px auto;
             padding: 20px;
-            background: white;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            border-radius: 8px;
-        }
-        h1, h2, h3 {
-            color: #333;
         }
         h2 {
-            margin-top: 30px;
+            color: #333;
         }
-        ul, ol {
-            margin: 10px 0 20px 20px;
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0 20px 0;
+            box-sizing: border-box;
+            font-size: 16px;
         }
-        code {
-            background: #eee;
-            padding: 2px 5px;
-            border-radius: 4px;
-            font-family: monospace;
+        ul {
+            list-style-type: square;
+            padding-left: 20px;
+        }
+        li {
+            margin: 8px 0;
         }
         a {
-            color: #0066cc;
             text-decoration: none;
+            color: #0066cc;
         }
         a:hover {
             text-decoration: underline;
@@ -62,100 +60,47 @@
 </header>
 
 <main>
-    <h1>Facetone User Creation Guide (HBL)</h1>
-    <p>Follow the steps below to create a new agent user account for HBL.</p>
+    <h2>Search Questions</h2>
+    <input type="text" id="searchInput" placeholder="Type to search questions..." onkeyup="filterQuestions()">
 
-    <h2>Steps Overview</h2>
-    <ol>
-        <li>Create User Account</li>
-        <li>Create Resources</li>
-        <li>Create SIP User Account</li>
-        <li>Map User with SIP Account</li>
-        <li>Add Scopes to the User</li>
-    </ol>
-
-    <h2>1. Create User Account</h2>
-    <ol>
-        <li>Log into the admin console.</li>
-        <li>Navigate to <strong>USER → Users</strong>.</li>
-        <li>Fill in the user details:</li>
-        <ul>
-            <li>Email: <code>agent@hbl.com</code></li>
-            <li>Password: <code>Hbl@123</code></li>
-            <li>User Type: Agent</li>
-            <li>First Name: Test</li>
-            <li>Last Name: Agent</li>
-            <li>Phone No.: use “1” if number is not provided</li>
-            <li>Nick Name: use the email address</li>
-        </ul>
-        <li>Click on <strong>Add User</strong> button. A notification will show success or error details.</li>
-    </ol>
-
-    <h2>2. Create Resources for the User</h2>
-    <ol>
-        <li>Navigate to <strong>Request Router → Resources</strong>.</li>
-        <li>Click on the <strong>+</strong> sign to create a new resource account.</li>
-        <li>Type the user's email in <strong>Resource Name</strong> and press check.</li>
-        <li>Insert <strong>Human, Agent, Call Center, Other Data</strong> and click <strong>Add</strong>.</li>
-        <li>Edit resource account and set permissions:</li>
-        <ul>
-            <li>Drag & drop <strong>Call task</strong> to access permission area.</li>
-            <li>Set <strong>Concurrency</strong> to 1.</li>
-        </ul>
-        <li>Assign Skills:</li>
-        <ul>
-            <li>Drag skill from <strong>Available Skills</strong> to <strong>Assigned Skills</strong>.</li>
-            <li>Set the percentage for the skill and press Enter.</li>
-            <li>Repeat for all necessary skills.</li>
-        </ul>
-    </ol>
-
-    <h2>3. Create SIP User Account</h2>
-    <ol>
-        <li>Navigate to <strong>USERS → SIP Users</strong>.</li>
-        <li>Find the last extension number and click <strong>New</strong>.</li>
-        <li>Fill in details:</li>
-        <ul>
-            <li>SIP Username: avoid special characters or numbers</li>
-            <li>Password: same as user account</li>
-            <li>Extension Number: next available</li>
-            <li>Pin: 1234</li>
-            <li>Email: user’s email address</li>
-            <li>Select domain & context, tick all fields</li>
-            <li>Deny Outbound: NONE</li>
-        </ul>
-        <li>Click <strong>Save</strong>. Notification will show success or error.</li>
-    </ol>
-
-    <h2>4. Map SIP User Account to User Account</h2>
-    <ol>
-        <li>Navigate to <strong>USERS → User</strong>.</li>
-        <li>Find the user and click the user icon.</li>
-        <li>Click <strong>Edit Profile</strong>.</li>
-        <li>Scroll down and select the SIP user account.</li>
-        <li>Click <strong>Save Profile</strong>.</li>
-    </ol>
-
-    <h2>5. Add Scopes to the User</h2>
-    <ol>
-        <li>Navigate to <strong>USERS → User</strong> and find the user.</li>
-        <li>Click the settings icon.</li>
-        <li>Drag & drop <strong>Agent Console</strong> from Access Denied to Access area.</li>
-        <li>Reload browser (mandatory).</li>
-        <li>Double click Agent Console, tick the fields, and click <strong>Update</strong>.</li>
-        <li>Repeat for all scopes, one by one.</li>
-    </ol>
-
-    <p>If there are any issues, contact <a href="mailto:support@duosoftware.com">DuoSoftware support team</a>.</p>
-
-    <p><em>Documented by: Duo Software Support Team | Date: 19-01-2020</em></p>
-
-    <p><a href="../index.html">&larr; Back to Knowledge Base</a></p>
+    <h2>All Questions</h2>
+    <ul id="questionList"></ul>
 </main>
 
 <footer>
     &copy; 2026 Office Knowledge Base
 </footer>
+
+<script>
+// Load questions from JSON database
+let questions = [];
+
+fetch('questions.json')
+.then(response => response.json())
+.then(data => {
+    questions = data;
+    const list = document.getElementById('questionList');
+    data.forEach(q => {
+        const li = document.createElement('li');
+        li.innerHTML = `<a href="${q.link}">${q.title}</a>`;
+        list.appendChild(li);
+    });
+});
+
+// Search/filter functionality
+function filterQuestions() {
+    const input = document.getElementById('searchInput').value.toLowerCase();
+    const list = document.getElementById('questionList');
+    list.innerHTML = '';
+    questions.forEach(q => {
+        if (q.title.toLowerCase().includes(input)) {
+            const li = document.createElement('li');
+            li.innerHTML = `<a href="${q.link}">${q.title}</a>`;
+            list.appendChild(li);
+        }
+    });
+}
+</script>
 
 </body>
 </html>
