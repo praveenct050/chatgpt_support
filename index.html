@@ -64,7 +64,12 @@
     <input type="text" id="searchInput" placeholder="Type to search questions..." onkeyup="filterQuestions()">
 
     <h2>All Questions</h2>
-    <ul id="questionList"></ul>
+    <ul id="questionList">
+        <li><a href="questions/facetone-user-creation.html">Facetone User Creation Guide</a></li>
+        <li><a href="questions/vpn-setup.html">How to configure VPN</a></li>
+        <li><a href="questions/email-reset.html">Reset Email Password</a></li>
+        <li><a href="questions/meeting-room.html">Book a Meeting Room</a></li>
+    </ul>
 </main>
 
 <footer>
@@ -72,33 +77,20 @@
 </footer>
 
 <script>
-// Load questions from JSON database
-let questions = [];
-
-fetch('questions.json')
-.then(response => response.json())
-.then(data => {
-    questions = data;
-    const list = document.getElementById('questionList');
-    data.forEach(q => {
-        const li = document.createElement('li');
-        li.innerHTML = `<a href="${q.link}">${q.title}</a>`;
-        list.appendChild(li);
-    });
-});
-
-// Search/filter functionality
+// Simple client-side search
 function filterQuestions() {
     const input = document.getElementById('searchInput').value.toLowerCase();
     const list = document.getElementById('questionList');
-    list.innerHTML = '';
-    questions.forEach(q => {
-        if (q.title.toLowerCase().includes(input)) {
-            const li = document.createElement('li');
-            li.innerHTML = `<a href="${q.link}">${q.title}</a>`;
-            list.appendChild(li);
+    const items = list.getElementsByTagName('li');
+
+    for (let i = 0; i < items.length; i++) {
+        const text = items[i].innerText.toLowerCase();
+        if (text.includes(input)) {
+            items[i].style.display = '';
+        } else {
+            items[i].style.display = 'none';
         }
-    });
+    }
 }
 </script>
 
