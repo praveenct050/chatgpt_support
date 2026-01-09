@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Office Knowledge Base</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0 20px 0;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        ul {
+            list-style-type: square;
+            padding-left: 20px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        a {
+            text-decoration: none;
+            color: #0066cc;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            text-align: center;
+            margin: 40px 0 20px 0;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Office Knowledge Base</h1>
+</header>
+
+<main>
+    <h2>Search Questions</h2>
+    <input type="text" id="searchInput" placeholder="Type to search questions..." onkeyup="filterQuestions()">
+
+    <h2>All Questions</h2>
+    <ul id="questionList">
+        <li><a href="questions/q1.html">How to configure VPN</a></li>
+        <li><a href="questions/q2.html">How to reset your email password</a></li>
+        <li><a href="questions/q3.html">How to request new hardware</a></li>
+        <li><a href="questions/q4.html">Steps to book a meeting room</a></li>
+        <li><a href="questions/q5.html">How to access office Wi-Fi</a></li>
+    </ul>
+</main>
+
+<footer>
+    &copy; 2026 Office Knowledge Base
+</footer>
+
+<script>
+function filterQuestions() {
+    const input = document.getElementById('searchInput').value.toLowerCase();
+    const list = document.getElementById('questionList');
+    const items = list.getElementsByTagName('li');
+    for (let i = 0; i < items.length; i++) {
+        const text = items[i].innerText.toLowerCase();
+        if (text.includes(input)) {
+            items[i].style.display = '';
+        } else {
+            items[i].style.display = 'none';
+        }
+    }
+}
+</script>
+
+</body>
+</html>
